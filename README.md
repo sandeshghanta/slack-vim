@@ -10,15 +10,18 @@ Not affiliated with or endorsed by Slack.
 
 ## Install
 
-slack-vim isn't on the Chrome Web Store. Load it from source:
+slack-vim isn't on the Chrome Web Store. Load it unpacked:
 
-1. `git clone https://github.com/sandeshghanta/slack-vim.git`
+1. Download `slack-vim-X.Y.Z.zip` from the
+   [latest release](https://github.com/sandeshghanta/slack-vim/releases/latest)
+   and unzip it, or `git clone` this repo and use its `extension/` folder.
 2. Open `chrome://extensions`, turn on **Developer mode**, click
-   **Load unpacked** and pick the `extension/` folder.
+   **Load unpacked** and pick that folder.
 3. Reload any open Slack tabs.
 
-To update: `git pull`, click the extension's reload button in
-`chrome://extensions`, then reload Slack.
+To update, replace the folder with the new release (or `git pull`), click the
+extension's reload button in `chrome://extensions`, then reload Slack. Changes
+are listed in [CHANGELOG.md](CHANGELOG.md).
 
 If you use [Vimium](https://github.com/philc/vimium), turn it off on Slack so
 the two don't fight over keys: Vimium options → **Excluded URLs and keys** →

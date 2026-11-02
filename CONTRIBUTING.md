@@ -48,6 +48,11 @@ channel where that's fine.
 CI only checks that the files parse; please run the behavior tests before
 sending a pull request and say what you ran it on.
 
+## Changelog and releases
+
+Add a line under `## [Unreleased]` in `CHANGELOG.md` for any change users
+would notice. Releases are cut by tagging; see [RELEASING.md](RELEASING.md).
+
 ## Style
 
 - Plain JavaScript, no framework, no build.
