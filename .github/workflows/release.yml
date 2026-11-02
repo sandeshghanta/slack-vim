@@ -41,7 +41,7 @@ jobs:
           sha256sum "$zip_name" > "$zip_name.sha256"
           echo "ZIP=$zip_name" >> "$GITHUB_ENV"
 
-      - uses: actions/attest-build-provenance@v2
+      - uses: actions/attest-build-provenance@v4
         with:
           subject-path: ${{ env.ZIP }}
 
