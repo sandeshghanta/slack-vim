@@ -20,6 +20,15 @@ The `release` workflow then checks that the tag matches the manifest, packages
 build provenance attestation, and publishes a GitHub release with that
 version's CHANGELOG section as its notes.
 
+## Pre-releases
+
+Chrome's `version` allows only numbers, so a beta keeps `"version": "X.Y.Z"`
+and adds `"version_name": "X.Y.Z-beta.N"` (shown in `chrome://extensions`).
+The CHANGELOG heading and the tag use the full name (`vX.Y.Z-beta.N`), and the
+release is marked as a pre-release. Drop `version_name` for the final release.
+
+## Verifying a download
+
 To check a downloaded zip came from this repo's workflow:
 
 ```sh

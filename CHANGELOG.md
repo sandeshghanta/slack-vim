@@ -6,9 +6,9 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
-## [0.1.0] - 2026-11-02
+## [0.1.0-beta.1] - 2026-11-02
 
-First public release.
+First public beta.
 
 ### Added
 
@@ -20,5 +20,5 @@ First public release.
 - `/` filters the sidebar or searches the open channel.
 - The cursor uses Slack's own hover look.
 
-[Unreleased]: https://github.com/sandeshghanta/slack-vim/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/sandeshghanta/slack-vim/releases/tag/v0.1.0
+[Unreleased]: https://github.com/sandeshghanta/slack-vim/compare/v0.1.0-beta.1...HEAD
+[0.1.0-beta.1]: https://github.com/sandeshghanta/slack-vim/releases/tag/v0.1.0-beta.1
