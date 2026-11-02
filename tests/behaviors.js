@@ -82,6 +82,17 @@
   await sleep(200);
   check("y copies message link", permalink.test(copied()), (copied() || "no link").replace(/\/p\d+.*/, "/p…"));
 
+  // 4b. Y copies the links written in a message
+  const linked = [...document.querySelectorAll('[data-qa="message_pane"] [role="listitem"]')].reverse().find((li) => li.querySelector('[data-qa="message-text"] a[href]:not([data-qa="channel_link"])'));
+  if (linked) {
+    const want = [...new Set([...linked.querySelectorAll('[data-qa="message-text"] a[href]:not([data-qa="channel_link"])')].map((a) => a.href))].join("\n");
+    linked.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
+    await sleep(100);
+    delete html.dataset.slackVimCopied;
+    await press("Y");
+    check("Y copies the links written in the message", copied() === want, `${want.split("\n").length} link(s)`);
+  } else skip("Y copies the links written in the message", "no message with links in view");
+
   // 5. H to the sidebar lands on the open channel; j/k there
   await press("H");
   const sel = document.querySelector('[data-qa="channel-sidebar"] [role="treeitem"][aria-current="true"]');

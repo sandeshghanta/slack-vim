@@ -22,6 +22,8 @@ const Slack = (() => {
     listItem: '[role="listitem"]',
     message: '[data-qa="message_container"]', // data-msg-channel-id, data-msg-ts
     timestamp: '[data-qa="timestamp_label"]', // inside <a href=message link>
+    messageText: '[data-qa="message-text"]', // what was written (not link previews or files)
+    channelLink: '[data-qa="channel_link"]', // #channel mention
     replies: '[data-qa="reply_bar_count"]',
     messageHover: ".c-message_kit__hover", // shows the actions toolbar on mouseover
     startThread: '[data-qa="start_thread"]', // toolbar's "Reply in thread"
@@ -67,6 +69,8 @@ const Slack = (() => {
     // Message link: the timestamp links to the message (thread replies carry thread_ts)
     permalink: (li) => li.querySelector(SEL.timestamp)?.closest("a[href]")?.href || null,
     // Message ts a link points at (…/p1787595248385969 -> 1787595248.385969)
+    // Links written in a message, in order, without repeats or #channel mentions
+    links: (li) => [...new Set($$(`${SEL.messageText} a[href]`, li).filter((a) => !a.matches(SEL.channelLink)).map((a) => a.href))],
     tsOfLink: (link) => link?.match(/\/p(\d{10})(\d{6})/)?.slice(1).join(".") || null,
     hasReplies: (li) => !!li.querySelector(SEL.replies),
 

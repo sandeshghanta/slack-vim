@@ -268,6 +268,18 @@
     toast(ok ? "copied" : "copy failed", li);
   }
 
+  // Y: every link written in the message, one per line
+  function yankLinks() {
+    const li = current();
+    if (!li) return missing(`${state.area} items`);
+    if (state.area === "sidebar") return toast("no link here", li);
+    const links = Slack.links(li);
+    if (!links.length) return toast("no links", li);
+    const ok = copy(links.join("\n"));
+    html.dataset.slackVimCopied = links.join("\n"); // read by tests/behaviors.js
+    toast(ok ? `copied ${links.length} link${links.length > 1 ? "s" : ""}` : "copy failed", li);
+  }
+
   // / searches the area: the sidebar's "Find a conversation" filter, or
   // Slack search limited to the open channel
   async function search() {
@@ -339,6 +351,7 @@
       else if (k === "H") (switchArea(-1), (handled = true)); // like Shift+h / Shift+l between nvim splits
       else if (k === "L") (switchArea(1), (handled = true));
       else if (k === "y") (yank(), (handled = true));
+      else if (k === "Y") (yankLinks(), (handled = true));
       else if (k === "i") (insert(), (handled = true));
       else if (k === "Enter" && !interactive(el)) (enter(), (handled = true));
       else if (k === "/" && (state.area === "sidebar" || state.area === "messages")) (search(), (handled = true));

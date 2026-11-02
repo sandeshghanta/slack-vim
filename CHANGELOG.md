@@ -6,6 +6,10 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- `Y` copies every link written in a message (one per line).
+
 ## [0.1.0-beta.1] - 2026-11-02
 
 First public beta.
