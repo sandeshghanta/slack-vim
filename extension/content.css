@@ -1,0 +1,26 @@
+/* The cursor reuses Slack's own hover look, plus a thin accent so it is
+   still visible on top of a real hover or the selected channel. */
+[data-slack-vim-cursor] .c-message_kit__background,
+[data-slack-vim-cursor] [data-qa="search_result"] {
+  background: rgba(18, 100, 163, 0.08);
+  box-shadow: inset 4px 0 0 rgb(18, 100, 163);
+}
+
+[data-slack-vim-cursor] :is(.p-channel_sidebar__channel, .p-channel_sidebar__link) {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 65%, transparent);
+}
+
+[data-slack-vim-cursor] :is(.p-channel_sidebar__channel, .p-channel_sidebar__link):not(.p-channel_sidebar__channel--selected) {
+  background: var(--dt_color-theme-surf-inv-ter);
+}
+
+.slack-vim-toast {
+  position: fixed;
+  pointer-events: none;
+  z-index: 2147483647;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #1d9bd1;
+  color: #fff;
+  font: 600 12px/18px system-ui, sans-serif;
+}

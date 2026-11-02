@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "slack-vim",
+  "version": "0.1.0",
+  "description": "Vim-style keys for Slack in Chrome: move through conversations, messages and threads, open, reply, search, copy links.",
+  "homepage_url": "https://github.com/sandeshghanta/slack-vim",
+  "minimum_chrome_version": "111",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.slack.com/*"
+      ],
+      "js": [
+        "slack.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}
