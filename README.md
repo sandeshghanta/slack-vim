@@ -8,6 +8,11 @@ app. No permissions beyond running on that site; nothing leaves your browser.
 
 Not affiliated with or endorsed by Slack.
 
+> **A personal project.** These are the keys I wanted, and I change them when
+> I want to. There's no promise of maintenance, support or stability: Slack
+> changes its page often and things may break until I get to them (or forever).
+> Issues and pull requests are welcome, but may not get a reply.
+
 ## Install
 
 slack-vim isn't on the Chrome Web Store. Load it unpacked:
@@ -59,6 +64,16 @@ Keys work only when you are not typing in a box.
 - `i` or a click on the message box types. Clicking a message, channel or
   reply moves the cursor there.
 
+## Customizing
+
+Everyone has opinions about keymaps, so there are no settings. Fork the repo
+and change it: point Claude Code (or another coding agent) at your fork and
+describe the keys you want. The README's key table is the spec it should
+update, the keys are handled in `onKey` in
+[`extension/content.js`](extension/content.js), and
+[`tests/behaviors.js`](tests/behaviors.js) checks the result in a live Slack
+tab.
+
 ## When Slack changes its page
 
 slack-vim reads Slack's page markup, which Slack can change at any time.
@@ -71,8 +86,8 @@ slack-vim reads Slack's page markup, which Slack can change at any time.
 - [`tests/behaviors.js`](tests/behaviors.js) checks every behavior above
   against live Slack. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Please [open an issue](https://github.com/sandeshghanta/slack-vim/issues) with
-the `can't find …` message if you hit one.
+If you hit one, an [issue](https://github.com/sandeshghanta/slack-vim/issues)
+with the `can't find …` message helps, though a fix isn't guaranteed.
 
 ## Contributing
 

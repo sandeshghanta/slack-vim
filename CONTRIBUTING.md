@@ -1,7 +1,9 @@
 # Contributing
 
-Bug reports and pull requests are welcome. Slack changes its page often, so
-reports that name the `can't find …` message are especially useful.
+This is a personal project with no promise of maintenance (see the README),
+so issues and pull requests may sit unanswered. If you want different keys or
+behavior, a fork is usually the faster route. Slack changes its page often, so
+reports that name the `can't find …` message are the most useful.
 
 ## Layout
 
