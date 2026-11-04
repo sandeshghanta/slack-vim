@@ -50,6 +50,7 @@ Keys work only when you are not typing in a box.
 | `Y` | — | copy the links written in the result | copy the links written in the message | copy the links written in the reply |
 | `i` | type in the chat's box | — | type in the chat's box | type in the reply box |
 | `x` | — | — | — | close the thread, cursor back on its message |
+| `]` / `[` | next / previous unread channel or DM | — | — | — |
 | `gg` / `G` | first (Threads) / last item | first / last result | `G`: newest message | first (the parent) / last reply |
 | `/` | filter conversations | — | search this channel (`in:#name`; plain search in a DM) | — |
 

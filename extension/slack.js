@@ -12,6 +12,7 @@ const Slack = (() => {
     sidebarLink: '[data-qa^="channel_sidebar_"]', // Threads, Huddles, Drafts & sent, Saved, Directories
     sidebarHeading: '[data-qa^="section_heading_toggle"]', // "Starred", "Channels", …: not items
     sidebarFilter: '[data-qa="sidebar-text-filter-input_input"]', // "Find a conversation"
+    sidebarUnread: ".p-channel_sidebar__channel--unread", // channel or DM with unread messages
     search: '[data-qa="search_view"]', // results on the left; the opened result's channel shows on the right
     searchResult: '[data-qa="search_result"]',
     messages: '[data-qa="message_pane"]',
@@ -75,6 +76,7 @@ const Slack = (() => {
     hasReplies: (li) => !!li.querySelector(SEL.replies),
 
     isChannel: (li) => !!li.querySelector(SEL.sidebarChannel),
+    isUnread: (li) => !!li.querySelector(SEL.sidebarUnread),
     openChannel: (li) => (li.querySelector(SEL.sidebarChannel) || li.querySelector(SEL.sidebarLink))?.click(),
     openThread: (li) => li.querySelector(SEL.replies)?.click(),
     // Hover a message as the mouse would (React's mouseenter is a mouseover from

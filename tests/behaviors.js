@@ -113,6 +113,19 @@
   for (let i = 0; i < firstChannel; i++) await press("j");
   await press("k");
   check("k from the first channel goes up into Threads … Directories", st().key === sidebarItems[firstChannel - 1]?.getAttribute("data-item-key"), JSON.stringify(st()));
+  // ] / [ go to the next / previous unread channel or DM
+  const unread = (li) => !!li?.querySelector(".p-channel_sidebar__channel--unread");
+  const keyIdx = () => sidebarItems.findIndex((li) => li.getAttribute("data-item-key") === st().key);
+  const startIdx = keyIdx();
+  const nextUnread = sidebarItems.findIndex((li, i) => i > startIdx && unread(li));
+  if (nextUnread < 0) skip("] / [ go to the next / previous unread", "no unread item below the cursor");
+  else {
+    await press("]");
+    check("] goes to the next unread", keyIdx() === nextUnread, JSON.stringify(st()));
+    const prevUnread = sidebarItems.findLastIndex((li, i) => i < nextUnread && unread(li));
+    await press("[");
+    check("[ goes to the previous unread (or stays)", keyIdx() === (prevUnread < 0 ? nextUnread : prevUnread), JSON.stringify(st()));
+  }
   check("other letters in sidebar don't reach Slack", await press("q") && st().area === "sidebar");
   // / filters the sidebar; Esc gives up and clears it
   const filter = document.querySelector('[data-qa="sidebar-text-filter-input_input"]');

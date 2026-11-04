@@ -181,6 +181,16 @@
     }
   }
 
+  // ] / [ in the sidebar: next / previous channel or DM with unread messages
+  function moveUnread(delta) {
+    const items = Slack.items("sidebar");
+    if (!items.length) return missing("sidebar items");
+    const cur = current();
+    for (let i = items.indexOf(cur) + delta; i >= 0 && i < items.length; i += delta) if (Slack.isUnread(items[i])) return show("sidebar", items[i]);
+    show("sidebar", cur);
+    toast(delta > 0 ? "no unread below" : "no unread above", cur);
+  }
+
   function switchArea(delta) {
     const areas = onScreen();
     const i = areas.indexOf(state.area);
@@ -357,6 +367,7 @@
       else if (k === "/" && (state.area === "sidebar" || state.area === "messages")) (search(), (handled = true));
       else if (k === "x" && state.on && state.area === "thread") (closeThread(), (handled = true));
       else if (k === "G" && state.on) (jumpEnd(true), (handled = true));
+      else if ((k === "]" || k === "[") && state.on && state.area === "sidebar") (moveUnread(k === "]" ? 1 : -1), (handled = true));
       else if (k === "g" && state.on && state.area !== "messages") {
         if (performance.now() - gPressed < 1000) (jumpEnd(false), (gPressed = 0));
         else gPressed = performance.now();
