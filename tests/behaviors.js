@@ -82,10 +82,12 @@
   await sleep(200);
   check("y copies message link", permalink.test(copied()), (copied() || "no link").replace(/\/p\d+.*/, "/p…"));
 
-  // 4b. Y copies the links written in a message
-  const linked = [...document.querySelectorAll('[data-qa="message_pane"] [role="listitem"]')].reverse().find((li) => li.querySelector('[data-qa="message-text"] a[href]:not([data-qa="channel_link"])'));
+  // 4b. Y copies the links written in a message, skipping links into Slack
+  const isSlackUrl = (href) => /^(.+\.)?slack\.com$/.test(new URL(href).hostname);
+  const outsideLinks = (li) => [...new Set([...li.querySelectorAll('[data-qa="message-text"] a[href]:not([data-qa="channel_link"])')].map((a) => a.href).filter((h) => !isSlackUrl(h)))];
+  const linked = [...document.querySelectorAll('[data-qa="message_pane"] [role="listitem"]')].reverse().find((li) => outsideLinks(li).length);
   if (linked) {
-    const want = [...new Set([...linked.querySelectorAll('[data-qa="message-text"] a[href]:not([data-qa="channel_link"])')].map((a) => a.href))].join("\n");
+    const want = outsideLinks(linked).join("\n");
     linked.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
     await sleep(100);
     delete html.dataset.slackVimCopied;

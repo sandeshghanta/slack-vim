@@ -41,7 +41,15 @@ const Slack = (() => {
     const r = el.getBoundingClientRect();
     return r.width > 0 && r.height > 0 ? el : null;
   };
-  const withMessage = (root) => (root ? $$(SEL.listItem, root).filter((li) => li.querySelector(SEL.message)) : []);
+  const isSlackUrl = (href) => {
+    try {
+      const host = new URL(href).hostname;
+      return host === "slack.com" || host.endsWith(".slack.com");
+    } catch {
+      return false;
+    }
+  };
+  const withMessage =(root) => (root ? $$(SEL.listItem, root).filter((li) => li.querySelector(SEL.message)) : []);
 
   const roots = {
     sidebar: () => visible($(SEL.sidebar)),
@@ -70,8 +78,8 @@ const Slack = (() => {
     // Message link: the timestamp links to the message (thread replies carry thread_ts)
     permalink: (li) => li.querySelector(SEL.timestamp)?.closest("a[href]")?.href || null,
     // Message ts a link points at (…/p1787595248385969 -> 1787595248.385969)
-    // Links written in a message, in order, without repeats or #channel mentions
-    links: (li) => [...new Set($$(`${SEL.messageText} a[href]`, li).filter((a) => !a.matches(SEL.channelLink)).map((a) => a.href))],
+    // Links written in a message, in order, without repeats or links into Slack (messages, channels, people)
+    links: (li) => [...new Set($$(`${SEL.messageText} a[href]`, li).filter((a) => !a.matches(SEL.channelLink) && !isSlackUrl(a.href)).map((a) => a.href))],
     tsOfLink: (link) => link?.match(/\/p(\d{10})(\d{6})/)?.slice(1).join(".") || null,
     hasReplies: (li) => !!li.querySelector(SEL.replies),
 

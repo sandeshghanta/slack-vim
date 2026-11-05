@@ -47,7 +47,7 @@ Keys work only when you are not typing in a box.
 | `j` / `k` | next / previous item (Threads, Saved, … and channels) | next / previous result | next / previous message | next / previous reply |
 | `Enter` | open it | open the result on the right, cursor on its message | open its thread, or start one in its reply box | — |
 | `y` | — | copy the result's link | copy the message link | copy the reply link |
-| `Y` | — | copy the links written in the result | copy the links written in the message | copy the links written in the reply |
+| `Y` | — | copy the non-Slack links in the result | copy the non-Slack links in the message | copy the non-Slack links in the reply |
 | `i` | type in the chat's box | — | type in the chat's box | type in the reply box |
 | `x` | — | — | — | close the thread, cursor back on its message |
 | `]` / `[` | next / previous unread channel or DM | — | — | — |
